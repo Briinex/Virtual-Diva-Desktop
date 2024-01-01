@@ -2,7 +2,9 @@
 ## How to use?
 Set an image folder path (Default is 1.jpg from the assets folder) 
 
-Hold shift + mouse[0] for the right eye and shift+mouse[2] for the left eye and you're done! 
+Hold shift + mouse[0] for the right eye and shift+mouse[2] for the left eye and you're done!
+
+If you want to reset the position of the eyes just press R
 
 ## Dependencies
 Python and PyGame
@@ -11,7 +13,9 @@ Open cmd and type
 `pip install pygame`
 
 ## Recent changes:
-Just added the whole thing
+Removed expression functions
+
+Added the reset function
 ## Things I'm working on
 Some actual movement, wobbling, vtuber model support, will probably completely scrach the code to not use PyGame because it's not really efficient for this kind of a thing(probably...)
 ## Author notes
