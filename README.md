@@ -2,7 +2,7 @@
 ## How to use?
 Set an image folder path (Default is 1.jpg from the assets folder) 
 
-Hold shift + mouse[0] for the right eye and shift+mouse[2] for the left eye and you're done!
+Hold Shift + Left Mouse button and add 2 eyes.   
 
 If you want to reset the position of the eyes just press R
 
