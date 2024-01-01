@@ -4,7 +4,7 @@ Set an image folder path (Default is 1.jpg from the assets folder)
 
 Hold shift + mouse[0] for the right eye and shift+mouse[2] for the left eye and you're done! 
 
-## GUI Version Dependencies
+## Dependencies
 Python and PyGame
 ### How to install pygame?
 Open cmd and type
