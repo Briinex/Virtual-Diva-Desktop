@@ -29,7 +29,7 @@ right_eye_pos = (1000,1000)
 left_eye_pos = (1000,1000)
 eyebrow_length = 30  # Increased length
 eyebrow_thickness = 10
-countLeftEye = 0
+countEye = 0
 countRightEye = 0
 # Mouse Capture
 mouse_y,mouse_x = (0,0)
@@ -67,26 +67,21 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif keys & pygame.KMOD_SHIFT and mouse_buttons[0]:  # Check Shift key and left mouse button
-            countLeftEye +=1
-            if countLeftEye > 1:
-                print("Eye already exists")
-            else:
-                left_eye_pos = (mouse_x,mouse_y)
-                angle_left = math.atan2(mouse_y - center_y, mouse_x - left_eye_pos[0])
-                pupil_left_x = left_eye_pos[0] + math.cos(angle_left) * pupil_distance
-                pupil_left_y = left_eye_pos[1] + math.sin(angle_left) * pupil_distance
-                pygame.draw.circle(screen, WHITE, left_eye_pos, eye_radius)
-                
-        elif keys & pygame.KMOD_SHIFT and mouse_buttons[2]: # check shift and right mouse button
-            countRightEye +=1
-            if countRightEye > 1:
-                print("Right eye already exists")
-            else:
+            countEye +=1
+            if countEye == 1:
                 pupil_right_x = right_eye_pos[0] + math.cos(angle_right) * pupil_distance
                 pupil_right_y = right_eye_pos[1] + math.sin(angle_right) * pupil_distance
                 right_eye_pos = (mouse_x,mouse_y)
                 angle_right = math.atan2(mouse_y - center_y, mouse_x - right_eye_pos[0])
                 pygame.draw.circle(screen, WHITE, right_eye_pos, eye_radius)
+            elif countEye == 2:
+                left_eye_pos = (mouse_x,mouse_y)
+                angle_left = math.atan2(mouse_y - center_y, mouse_x - left_eye_pos[0])
+                pupil_left_x = left_eye_pos[0] + math.cos(angle_left) * pupil_distance
+                pupil_left_y = left_eye_pos[1] + math.sin(angle_left) * pupil_distance
+                pygame.draw.circle(screen, WHITE, left_eye_pos, eye_radius)
+            elif countEye > 2:
+                print("Eyes already exist")       
         
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
