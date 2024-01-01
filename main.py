@@ -1,6 +1,9 @@
 import pygame
 import math
 import random
+#use some miku sprites
+#that will like, make her angry sometimes
+#sometimes shell be happy
 
 # Initialize Pygame
 pygame.init()
@@ -30,7 +33,9 @@ countLeftEye = 0
 countRightEye = 0
 # Mouse Capture
 mouse_y,mouse_x = (0,0)
-
+# Wobbling parameters
+wobble_speed = 0.1  # Adjust the speed of the wobble
+wobble_range = 10    # Adjust the range of the wobble
 def leftPupil():
     global pupil_left_x,pupil_left_y,right_eye_pos,left_eye_pos
     angle_left = math.atan2(mouse_y - center_y, mouse_x - left_eye_pos[0])
@@ -50,20 +55,7 @@ click_sound = pygame.mixer.Sound("assets/mikudayo.wav")
 count = 0
 # Draw the image
 screen.blit(background_image, (0, 0))
-def angryFaceExpression():
-    pygame.draw.line(screen, BLACK, (left_eye_pos[0]-20, left_eye_pos[1]-30),  # x y right from your point of view
-                                    (left_eye_pos[0] + eyebrow_length, left_eye_pos[1] -50 + eyebrow_thickness), eyebrow_thickness)
-    pygame.draw.line(screen, BLACK, (right_eye_pos[0]+20, right_eye_pos[1]-30),  # x y left from your point of view
-                                    (right_eye_pos[0] - eyebrow_length, right_eye_pos[1] -50 + eyebrow_thickness), eyebrow_thickness)
-def faceSadExpression():
-    pygame.draw.line(screen, BLACK, (left_eye_pos[0]-20, left_eye_pos[1]-40),  # x y right from your point of view
-                    (left_eye_pos[0] + eyebrow_length, left_eye_pos[1] -30 + eyebrow_thickness), eyebrow_thickness)
-    
-    pygame.draw.line(screen, BLACK, (right_eye_pos[0]+20, right_eye_pos[1]-40),  # x y left from your point of view
-                    (right_eye_pos[0] - eyebrow_length, right_eye_pos[1] -30 + eyebrow_thickness), eyebrow_thickness)
-def cuteFace():
-    pygame.draw.line()
-    
+
 # Game loop
 running = True
 while running:
@@ -95,22 +87,21 @@ while running:
                 right_eye_pos = (mouse_x,mouse_y)
                 angle_right = math.atan2(mouse_y - center_y, mouse_x - right_eye_pos[0])
                 pygame.draw.circle(screen, WHITE, right_eye_pos, eye_radius)
-
+        
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_r:
+                right_eye_pos=(1000,1000)
+                left_eye_pos=(1000,1000)
+                screen.blit(background_image,(0,0))
+                countLeftEye=0
+                countRightEye=0
+        
         elif event.type == pygame.MOUSEBUTTONDOWN:  # Check for mouse click event
             if event.button == 1:  # Check for left mouse button click (1)
                 ranPlay = int(random.randint(1,25))
                 if ranPlay == 12:
                     click_sound.play()  # Play a sound upon mouse click
-                count +=2
-                if count % 2 == 0:
-                    ranExp = int(random.randint(1, 50))  # Generate a random number between 1 and 10  
-                    print(ranExp)  
-                    if ranExp in [1,2,3,4,5,6,]:  # Check if the random number falls within [1, 2, 3]
-                        screen.blit(background_image, (0, 0))
-                        angryFaceExpression()
-                    if ranExp in [30,31,32,33,34,45,49]:
-                        screen.blit(background_image, (0, 0))
-                        faceSadExpression()
+        
         else:
             pygame.display.flip()
             # Get mouse position
